@@ -1,3 +1,5 @@
+const { createQrApi } = require("../utils/apis");
+
 const createqr = async (params) => {
   const { message, args } = params;
   if (!args) {
@@ -11,13 +13,13 @@ const createqr = async (params) => {
       embeds: [
         {
           thumbnail: {
-            url: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${args[0]}`,
+            url: createQrApi(args[0]),
           },
         },
       ],
     });
   } catch (error) {
-    console.log(error);
+    message.channel.send("unable to generate qr code");
   }
 };
 

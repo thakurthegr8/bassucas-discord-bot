@@ -1,14 +1,11 @@
 require("dotenv").config();
-const express = require("express");
-const app = express();
+const init = require("./__init__");
+
+//checking existing environment variables
+init();
+
 const { Client, GatewayIntentBits } = require("discord.js");
 const commands = require("./commands");
-
-app.get("/", (req, res) =>
-  res.status(200).json("bassucas discord bot is running")
-);
-
-app.listen(3000, () => console.log("bot is listening"));
 
 const bot = new Client({
   intents: [
@@ -35,7 +32,10 @@ bot.on("messageCreate", (message) => {
       .substring(prefix.length)
       .split(/\s+/);
     const [commandName, ...args] = command;
-    if (commandName === "getcommands") commands.getcommands(message);
+    if (commandName === "getcommands") {
+      commands.getcommands(message);
+      return;
+    }
     if (commands[commandName]) {
       const params = { message, args };
       commands[commandName](params);

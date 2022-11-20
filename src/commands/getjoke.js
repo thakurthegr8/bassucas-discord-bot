@@ -1,20 +1,11 @@
 const axios = require("axios");
-
-const options = {
-  method: "GET",
-  url: "https://jokeapi-v2.p.rapidapi.com/joke/Any",
-  headers: {
-    "X-RapidAPI-Key": process.env.RAPID_API_KEY,
-    "X-RapidAPI-Host": "jokeapi-v2.p.rapidapi.com",
-  },
-};
+const { jokeApi } = require("../utils/apis");
 
 const getjoke = async (params) => {
   const { message } = params;
   try {
-    const response = await axios.request(options);
+    const response = await axios.request(jokeApi);
     const data = await response.data;
-    console.log(data);
     if (data.type === "single") {
       message.channel.send(data.joke);
     } else if (data.type === "twopart") {
@@ -22,7 +13,8 @@ const getjoke = async (params) => {
       message.channel.send(convertedJoke);
     }
   } catch (error) {
-    console.log(data);
+    console.log(error);
+    message.channel.send("unable to get joke");
   }
 };
 

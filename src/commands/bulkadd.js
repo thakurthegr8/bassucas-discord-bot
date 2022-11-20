@@ -8,6 +8,7 @@ const bulkadd = async (params) => {
     args.forEach((item) => message.channel.send(item));
   } catch (error) {
     console.log(error);
+    message.channel.send("An error occurred during bulk insertion of messages");
   }
 };
 
