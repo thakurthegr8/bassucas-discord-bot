@@ -1,6 +1,6 @@
 const commandsList = [
-  { command: ">getjoke", supportsArguments: false },
-  { command: ">getweather", supportsArguments: true },
+    { command: "/getjoke", supportsArguments: false },
+    { command: "/getweather", supportsArguments: true },
 ];
 
 module.exports = commandsList;
