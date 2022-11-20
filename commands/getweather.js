@@ -18,8 +18,9 @@ const getweather = async (params) => {
   try {
     const response = await axios.request(options(args[0]));
     const data = await response.data;
-    console.log(data);
-    message.channel.send(JSON.stringify(data));
+    const heading = `${data.name} Temperature\n`;
+    const temperature = `${data.main.temp} degF\n`;
+    message.channel.send(`${heading}${temperature}`);
   } catch (error) {
     console.log(error);
   }
